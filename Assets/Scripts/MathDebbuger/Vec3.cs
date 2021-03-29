@@ -168,11 +168,42 @@ namespace CustomMath
         }
         public static Vec3 Max(Vec3 a, Vec3 b)
         {
-            throw new NotImplementedException();
+            float x = 0.0f;
+            float y = 0.0f;
+            float z = 0.0f;
+            if (a.x > b.x)
+                x = a.x;
+            else
+                x = b.x;
+            if (a.y > b.y)
+                y = a.y;
+            else
+                y = b.y;
+            if (a.z > b.z)
+                z = a.z;
+            else
+                z = b.z;
+            return new Vec3(x,y,z);
         }
         public static Vec3 Min(Vec3 a, Vec3 b)
         {
-            throw new NotImplementedException();
+            float x = 0.0f;
+            float y = 0.0f;
+            float z = 0.0f;
+            if (a.x < b.x)
+                x = a.x;
+            else
+                x = b.x;
+            if (a.y < b.y)
+                y = a.y;
+            else
+                y = b.x;
+            if (a.z < b.z)
+                z = a.z;
+            else
+                z = b.z;
+            return new Vec3(x,y,z);
+            //throw new NotImplementedException();
         }
         public static float SqrMagnitude(Vec3 vector)
         {
@@ -188,7 +219,9 @@ namespace CustomMath
         }
         public void Set(float newX, float newY, float newZ)
         {
-            throw new NotImplementedException();
+            x = newX;
+            y = newY;
+            z = newZ;
         }
         public void Scale(Vec3 scale)
         {
