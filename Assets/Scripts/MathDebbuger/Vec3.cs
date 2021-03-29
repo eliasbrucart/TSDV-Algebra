@@ -150,8 +150,7 @@ namespace CustomMath
         }
         public static float Distance(Vec3 a, Vec3 b)
         {
-            float module = Mathf.Sqrt(Mathf.Pow(b.x - a.x, 2) + Mathf.Pow(b.y - a.y, 2) + Mathf.Pow(b.z - a.z, 2));
-            return module;
+            return Mathf.Sqrt(Mathf.Pow(b.x - a.x, 2) + Mathf.Pow(b.y - a.y, 2) + Mathf.Pow(b.z - a.z, 2));
         }
         public static float Dot(Vec3 a, Vec3 b)
         {
@@ -159,14 +158,9 @@ namespace CustomMath
         }
         public static Vec3 Lerp(Vec3 a, Vec3 b, float t)
         {
-            Vec3 vec = Vec3.One;
-            if (t < 1){
-                vec = new Vec3(a + (b - a) * t);
-            }
-            else{
-                t = 1.0f;
-            }
-            return vec;
+            if(t >= 1)
+                return b;
+            return new Vec3(a + (b - a) * t);
         }
         public static Vec3 LerpUnclamped(Vec3 a, Vec3 b, float t)
         {
