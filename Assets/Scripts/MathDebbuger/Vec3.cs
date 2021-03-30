@@ -203,7 +203,6 @@ namespace CustomMath
             else
                 z = b.z;
             return new Vec3(x,y,z);
-            //throw new NotImplementedException();
         }
         public static float SqrMagnitude(Vec3 vector)
         {
@@ -225,7 +224,7 @@ namespace CustomMath
         }
         public void Scale(Vec3 scale)
         {
-            throw new NotImplementedException();
+            scale = new Vec3(x*scale.x, y*scale.y, z*scale.z);
         }
         public void Normalize()
         {
