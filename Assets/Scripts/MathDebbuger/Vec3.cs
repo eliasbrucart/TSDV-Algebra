@@ -209,7 +209,7 @@ namespace CustomMath
         }
         public static Vec3 Project(Vec3 vector, Vec3 onNormal) 
         {
-            throw new NotImplementedException();
+            return (Dot(vector, onNormal) / Mathf.Pow(Magnitude(onNormal), 2) * onNormal);
         }
         public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal) 
         {
