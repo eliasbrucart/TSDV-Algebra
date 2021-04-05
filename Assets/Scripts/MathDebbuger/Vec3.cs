@@ -163,7 +163,7 @@ namespace CustomMath
         }
         public static Vec3 LerpUnclamped(Vec3 a, Vec3 b, float t)
         {
-            throw new NotImplementedException();
+            return new Vec3(a + (b - a) * t);
         }
         public static Vec3 Max(Vec3 a, Vec3 b)
         {
