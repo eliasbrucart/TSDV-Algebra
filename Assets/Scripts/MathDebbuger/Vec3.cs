@@ -141,8 +141,7 @@ namespace CustomMath
         }
         public static float Magnitude(Vec3 vector)
         {
-            float magnitude = Mathf.Sqrt(vector.x + vector.y + vector.z);
-            return Mathf.Pow(magnitude, 2);
+            return Mathf.Sqrt(Mathf.Pow(vector.x, 2) + Mathf.Pow(vector.y, 2) + Mathf.Pow(vector.z, 2));
         }
         public static Vec3 Cross(Vec3 a, Vec3 b)
         {
@@ -206,7 +205,7 @@ namespace CustomMath
         }
         public static float SqrMagnitude(Vec3 vector)
         {
-            return vector.sqrMagnitude;
+            return Mathf.Sqrt(Magnitude(vector));
         }
         public static Vec3 Project(Vec3 vector, Vec3 onNormal) 
         {
