@@ -228,7 +228,9 @@ namespace CustomMath
         }
         public void Normalize()
         {
-            throw new NotImplementedException();
+            x = x / magnitude;
+            y = y / magnitude;
+            z = z / magnitude;
         }
         #endregion
 
