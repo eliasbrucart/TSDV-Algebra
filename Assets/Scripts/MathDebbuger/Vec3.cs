@@ -213,7 +213,8 @@ namespace CustomMath
         }
         public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal) 
         {
-            throw new NotImplementedException();
+            Vec3 normal = new Vec3(inNormal.normalized);
+            return inDirection - 2 * (Vec3.Dot(inDirection, normal)) * normal;
         }
         public void Set(float newX, float newY, float newZ)
         {
