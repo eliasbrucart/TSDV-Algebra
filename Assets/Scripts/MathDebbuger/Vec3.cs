@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 namespace CustomMath
 {
@@ -11,9 +9,26 @@ namespace CustomMath
         public float y;
         public float z;
 
-        public float sqrMagnitude { get { throw new NotImplementedException(); } }
-        public Vector3 normalized { get { throw new NotImplementedException(); } }
-        public float magnitude { get { throw new NotImplementedException(); } }
+        public float sqrMagnitude 
+        { 
+            get 
+            { 
+                return (x*x + y*y + z*z);
+            } 
+        }
+        public Vec3 normalized 
+        { 
+            get 
+            { 
+                Vec3 v3Aux = new Vec3(x, y, z);
+                return (v3Aux / v3Aux.magnitude);
+            } 
+        }
+        public float magnitude { get 
+            {
+                return (float)Math.Sqrt(sqrMagnitude);
+            } 
+        }
         #endregion
 
         #region constants
@@ -137,7 +152,10 @@ namespace CustomMath
         }
         public static Vec3 ClampMagnitude(Vec3 vector, float maxLength)
         {
-            throw new NotImplementedException();
+            if (Magnitude(vector) > maxLength)
+                return vector.normalized * maxLength;
+            else
+                return vector;
         }
         public static float Magnitude(Vec3 vector)
         {
