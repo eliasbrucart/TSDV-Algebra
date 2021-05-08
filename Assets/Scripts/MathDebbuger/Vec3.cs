@@ -242,7 +242,7 @@ namespace CustomMath
         }
         public void Scale(Vec3 scale)
         {
-            scale = new Vec3(x*scale.x, y*scale.y, z*scale.z);
+            Set(x*scale.x, y*scale.y, z*scale.z);
         }
         public void Normalize()
         {
