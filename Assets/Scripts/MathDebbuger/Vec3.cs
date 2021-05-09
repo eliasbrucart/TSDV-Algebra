@@ -16,7 +16,7 @@ namespace CustomMath
                 return (x*x + y*y + z*z);
             } 
         }
-        public Vec3 normalized 
+        public Vec3 normalized
         { 
             get 
             { 
@@ -163,7 +163,7 @@ namespace CustomMath
         }
         public static Vec3 Cross(Vec3 a, Vec3 b)
         {
-            return new Vec3((a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x));
+            return new Vec3(((a.y * b.z) - (a.z * b.y)), ((a.z * b.x) - (a.x * b.z)), ((a.x * b.y) - (a.y * b.x)));
         }
         public static float Distance(Vec3 a, Vec3 b)
         {
@@ -185,41 +185,29 @@ namespace CustomMath
         }
         public static Vec3 Max(Vec3 a, Vec3 b)
         {
-            float x = 0.0f;
-            float y = 0.0f;
-            float z = 0.0f;
-            if (a.x > b.x)
-                x = a.x;
-            else
-                x = b.x;
-            if (a.y > b.y)
-                y = a.y;
-            else
-                y = b.y;
-            if (a.z > b.z)
-                z = a.z;
-            else
-                z = b.z;
-            return new Vec3(x,y,z);
+            float newX = a.x;
+            float newY = a.y;
+            float newZ = a.z;
+            if (b.x > newX)
+                newX = b.x;
+            if (b.y > newY)
+                newY = b.y;
+            if (b.z > newZ)
+                newZ = b.z;
+            return new Vec3(newX,newY,newZ);
         }
         public static Vec3 Min(Vec3 a, Vec3 b)
         {
-            float x = 0.0f;
-            float y = 0.0f;
-            float z = 0.0f;
-            if (a.x < b.x)
-                x = a.x;
-            else
-                x = b.x;
-            if (a.y < b.y)
-                y = a.y;
-            else
-                y = b.x;
-            if (a.z < b.z)
-                z = a.z;
-            else
-                z = b.z;
-            return new Vec3(x,y,z);
+            float newX = a.x;
+            float newY = a.y;
+            float newZ = a.z;
+            if (b.x < newX)
+                newX = b.x;
+            if (b.y < newY)
+                newY = b.y;
+            if (b.z < newZ)
+                newZ = b.z;
+            return new Vec3(newX,newY,newZ);
         }
         public static float SqrMagnitude(Vec3 vector)
         {
@@ -231,8 +219,9 @@ namespace CustomMath
         }
         public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal) 
         {
-            Vec3 normal = new Vec3(inNormal.normalized);
-            return inDirection - 2 * (Vec3.Dot(inDirection, normal)) * normal;
+            //Vec3 normal = new Vec3(inNormal.normalized);
+            inNormal.Normalize();
+            return inDirection - 2 * (Dot(inDirection, inNormal)) * inNormal;
         }
         public void Set(float newX, float newY, float newZ)
         {
@@ -243,6 +232,10 @@ namespace CustomMath
         public void Scale(Vec3 scale)
         {
             Set(x*scale.x, y*scale.y, z*scale.z);
+        }
+        public static Vec3 Scale(Vec3 a, Vec3 b)
+        {
+            return new Vec3(a.x * b.x, a.y * b.y, a.z * b.z);
         }
         public void Normalize()
         {
