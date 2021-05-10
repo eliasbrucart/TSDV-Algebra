@@ -93,14 +93,8 @@ public class EjerVec : MonoBehaviour
                 break;
         }
 
-        //first = new Vec3(FirstVector);
-        //second = new Vec3(SecondVector);
-        //third = new Vec3(ThirdVector);
-
         Vector3Debugger.UpdatePosition("First", first);
         Vector3Debugger.UpdatePosition("Second", second);
         Vector3Debugger.UpdatePosition("Third", third);
-
-        Plane a = new Plane();
     }
 }

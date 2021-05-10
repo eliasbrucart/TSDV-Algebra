@@ -595,7 +595,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1328391790}
-  - component: {fileID: 1328391791}
   m_Layer: 0
   m_Name: Frustum
   m_TagString: Untagged
@@ -617,26 +616,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1328391791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1328391789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68426982ceb94c64da89f83ca7025227, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  point1: {x: 0, y: 0, z: 0}
-  point2: {x: 0, y: 0, z: 0}
-  point3: {x: 0, y: 0, z: 0}
-  point4: {x: 0, y: 0, z: 0}
-  point5: {x: 0, y: 0, z: 0}
-  point6: {x: 0, y: 0, z: 0}
-  point7: {x: 0, y: 0, z: 0}
-  point8: {x: 0, y: 0, z: 0}
 --- !u!1 &1522249675
 GameObject:
   m_ObjectHideFlags: 0

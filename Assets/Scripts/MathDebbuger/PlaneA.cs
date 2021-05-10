@@ -24,11 +24,6 @@ namespace CustomMath
             distance = -Vec3.Dot(normal, inPoint);
         }
     
-        public PlaneA(Vec3 inNormal, float d)
-        {
-            
-        }
-    
         public PlaneA(Vec3 a, Vec3 b, Vec3 c)
         {
             Vec3 sideA = b - a;
