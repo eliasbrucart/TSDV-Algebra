@@ -219,7 +219,6 @@ namespace CustomMath
         }
         public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal) 
         {
-            //Vec3 normal = new Vec3(inNormal.normalized);
             inNormal.Normalize();
             return inDirection - 2 * (Dot(inDirection, inNormal)) * inNormal;
         }

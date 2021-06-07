@@ -245,7 +245,7 @@ MonoBehaviour:
   FirstVector: {x: 0, y: 0, z: 0}
   SecondVector: {x: 0, y: 0, z: 0}
   ThirdVector: {x: 0, y: 0, z: 0}
-  opciones: 5
+  opciones: 7
 --- !u!4 &503643719
 Transform:
   m_ObjectHideFlags: 0
