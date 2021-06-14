@@ -235,6 +235,30 @@ namespace CustomMath
         }
 
         #endregion
+
+        #region operators
+
+        public static Vec3 operator *(MyQuaternion rotation, Vec3 point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static MyQuaternion operator *(MyQuaternion lhs, MyQuaternion rhs)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool operator ==(MyQuaternion lhs, MyQuaternion rhs)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool operator !=(MyQuaternion lhs, MyQuaternion rhs)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
 
