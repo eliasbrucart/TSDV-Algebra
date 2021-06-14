@@ -250,12 +250,12 @@ namespace CustomMath
 
         public static bool operator ==(MyQuaternion lhs, MyQuaternion rhs)
         {
-            throw new NotImplementedException();
+            return (lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z && lhs.w == rhs.w);
         }
 
         public static bool operator !=(MyQuaternion lhs, MyQuaternion rhs)
         {
-            throw new NotImplementedException();
+            return (lhs.x != rhs.x || lhs.y != rhs.y || lhs.z != rhs.z || lhs.w != rhs.w);
         }
 
         #endregion
