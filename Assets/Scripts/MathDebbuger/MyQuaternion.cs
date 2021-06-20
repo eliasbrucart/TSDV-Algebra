@@ -245,7 +245,11 @@ namespace CustomMath
 
         public static MyQuaternion operator *(MyQuaternion lhs, MyQuaternion rhs)
         {
-            throw new NotImplementedException();
+            float x = (lhs.w * rhs.x) + (lhs.x * rhs.w) + (lhs.y * rhs.z) - (lhs.z * rhs.y);
+            float y = (lhs.w * rhs.y) + (lhs.x * rhs.z) + (lhs.y * rhs.w) - (lhs.z * rhs.x);
+            float z = (lhs.w * rhs.z) + (lhs.x * rhs.y) + (lhs.y * rhs.x) - (lhs.z * rhs.w);
+            float w = (lhs.w * rhs.w) + (lhs.x * rhs.x) + (lhs.y * rhs.y) - (lhs.z * rhs.z);
+            return new MyQuaternion(x,y,z,w);
         }
 
         public static bool operator ==(MyQuaternion lhs, MyQuaternion rhs)
