@@ -11,7 +11,7 @@ namespace CustomMath
         public float z;
         public float w;
 
-        public static MyQuaternion identity { get; }
+        public static MyQuaternion identity { get { return new MyQuaternion(0, 0, 0, 1); } }
         //public Vec3 eulerAngles { get; set; }
         //public MyQuaternion normalized { get; }
 
@@ -26,10 +26,10 @@ namespace CustomMath
 
         //public MyQuaternion()
         //{
-        //    this.x = 0.0f;
-        //    this.y = 0.0f;
-        //    this.z = 0.0f;
-        //    this.w = 0.0f;
+        //    this.x = 0;
+        //    this.y = 0;
+        //    this.z = 0;
+        //    this.w = 0;
         //}
 
         public MyQuaternion(MyQuaternion quat)
@@ -40,7 +40,18 @@ namespace CustomMath
             this.w = quat.w;
         }
 
+        public float this[int index] { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
+
         //operators
+        public static implicit operator Quaternion(MyQuaternion q)
+        {
+            return new Quaternion(q.x, q.y, q.z, q.w);
+        }
+
+        public static implicit operator MyQuaternion(Quaternion q)
+        {
+            return new MyQuaternion(q.x, q.y, q.z, q.w);
+        }
 
         //methods
         #region Methods
