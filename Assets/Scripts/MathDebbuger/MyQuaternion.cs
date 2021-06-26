@@ -127,7 +127,20 @@ namespace CustomMath
 
         public static MyQuaternion Lerp(MyQuaternion a, MyQuaternion b, float t)
         {
-            throw new NotImplementedException();
+            MyQuaternion q = new MyQuaternion();
+            if(t < 1)
+            {
+                q.x = ((b.x - a.x) * t + a.x);
+                q.y = ((b.y - a.y) * t + a.y);
+                q.z = ((b.z - a.z) * t + a.z);
+                q.w = ((b.w - a.w) * t + a.w);
+            }
+            else
+            {
+                t = 1.0f;
+            }
+            q.Normalize();
+            return q;
         }
 
         public static MyQuaternion LerpUnclamped(MyQuaternion a, MyQuaternion b, float t)
