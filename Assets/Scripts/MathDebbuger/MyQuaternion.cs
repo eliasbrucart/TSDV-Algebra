@@ -65,7 +65,18 @@ namespace CustomMath
 
         public static MyQuaternion AngleAxis(float angle, Vec3 axis)
         {
-            throw new NotImplementedException();
+            angle *= Mathf.Deg2Rad;
+            axis.Normalize();
+            MyQuaternion result = new MyQuaternion
+            {
+                x = axis.x * Mathf.Sin(angle * 0.5f),
+                y = axis.y * Mathf.Sin(angle * 0.5f),
+                z = axis.y * Mathf.Sin(angle * 0.5f),
+                w = Mathf.Cos(angle * 0.5f)
+            };
+            result.Normalize();
+
+            return result;
         }
 
         public static MyQuaternion AxisAngle(Vec3 axis, float angle)
@@ -136,7 +147,12 @@ namespace CustomMath
 
         public static MyQuaternion Normalize(MyQuaternion q)
         {
-            throw new NotImplementedException();
+            float magnitude = Mathf.Sqrt(q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w);
+            q.x /= magnitude;
+            q.y /= magnitude;
+            q.z /= magnitude;
+            q.w /= magnitude;
+            return q;
         }
 
         public static MyQuaternion RotateTowards(MyQuaternion from, MyQuaternion to, float maxDegreesDelta)
@@ -174,9 +190,13 @@ namespace CustomMath
             throw new NotImplementedException();
         }
 
-        public void Normalized()
+        public void Normalize()
         {
-            throw new NotImplementedException();
+            float magnitude = Mathf.Sqrt(x * x + y * y + z * z + w * w);
+            x /= magnitude;
+            y /= magnitude;
+            z /= magnitude;
+            w /= magnitude;
         }
 
         public void Set(float newX, float newY, float newZ, float newW)
