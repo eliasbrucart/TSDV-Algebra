@@ -57,7 +57,10 @@ namespace CustomMath
         #region Methods
         public static float Angle(MyQuaternion a, MyQuaternion b)
         {
-            throw new NotImplementedException();
+            MyQuaternion inverse = MyQuaternion.Inverse(a);
+            MyQuaternion result = b * inverse;
+            float angle = Mathf.Acos(result.w) * 2.0f * Mathf.Rad2Deg;
+            return angle;
         }
 
         public static MyQuaternion AngleAxis(float angle, Vec3 axis)
