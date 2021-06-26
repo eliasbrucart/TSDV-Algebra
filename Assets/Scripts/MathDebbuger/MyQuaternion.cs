@@ -110,7 +110,8 @@ namespace CustomMath
 
         public static MyQuaternion Inverse(MyQuaternion rotation)
         {
-            throw new NotImplementedException();
+            MyQuaternion inverse = new MyQuaternion(-rotation.x, -rotation.y, -rotation.z, rotation.w);
+            return inverse;
         }
 
         public static MyQuaternion Lerp(MyQuaternion a, MyQuaternion b, float t)
