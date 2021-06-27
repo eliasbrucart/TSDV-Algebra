@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CustomMath
-{ 
+{
     public class Matrix4x4 : MonoBehaviour
     {
         public float m00;
@@ -47,15 +45,15 @@ namespace CustomMath
         {
             get
             {
-                return new Matrix4x4(new Vector4(0,0,0,0), new Vector4(0,0,0,0), new Vector4(0,0,0,0), new Vector4(0,0,0,0));
+                return new Matrix4x4(new Vector4(0, 0, 0, 0), new Vector4(0, 0, 0, 0), new Vector4(0, 0, 0, 0), new Vector4(0, 0, 0, 0));
             }
         }
 
-        public static  Matrix4x4 identity
+        public static Matrix4x4 identity
         {
             get
             {
-                return new Matrix4x4(new Vector4(1,0,0,0), new Vector4(0,1,0,0), new Vector4(0,0,1,0), new Vector4(0,0,0,1));
+                return new Matrix4x4(new Vector4(1, 0, 0, 0), new Vector4(0, 1, 0, 0), new Vector4(0, 0, 1, 0), new Vector4(0, 0, 0, 1));
             }
         }
 
@@ -95,6 +93,65 @@ namespace CustomMath
             mat.m33 = 1;
             return mat;
         }
+
+        public static Matrix4x4 TRS(Vec3 pos, MyQuaternion q, Vec3 scale)
+        {
+            Matrix4x4 trs = Matrix4x4.zero;
+            trs = Matrix4x4.Translate(pos) * Matrix4x4.Rotate(q) * Matrix4x4.Scale(scale);
+            return trs;
+        }
+
+        public static Vector4 operator *(Matrix4x4 lhs, Vector4 vector)
+        {
+            Vector4 vec;
+            vec.x = (lhs.m00 * vector.x) + (lhs.m01 * vector.y) + (lhs.m02 * vector.z) + (lhs.m03 * vector.w);
+            vec.y = (lhs.m10 * vector.x) + (lhs.m11 * vector.y) + (lhs.m12 * vector.z) + (lhs.m13 * vector.w);
+            vec.z = (lhs.m20 * vector.x) + (lhs.m21 * vector.y) + (lhs.m22 * vector.z) + (lhs.m23 * vector.w);
+            vec.w = (lhs.m30 * vector.x) + (lhs.m31 * vector.y) + (lhs.m32 * vector.z) + (lhs.m33 * vector.w);
+            return vec;
+        }
+
+        public static Matrix4x4 operator *(Matrix4x4 lhs, Matrix4x4 rhs)
+        {
+            Matrix4x4 mat = new Matrix4x4(Vector4.zero, Vector4.zero, Vector4.zero, Vector4.zero);
+            mat.m00 = (lhs.m00 * rhs.m00) + (lhs.m01 * rhs.m10) + (lhs.m02 * rhs.m20) + (lhs.m03 * rhs.m30);
+            mat.m01 = (lhs.m00 * rhs.m01) + (lhs.m01 * rhs.m11) + (lhs.m02 * rhs.m21) + (lhs.m03 * rhs.m31);
+            mat.m02 = (lhs.m00 * rhs.m02) + (lhs.m01 * rhs.m12) + (lhs.m02 * rhs.m22) + (lhs.m03 * rhs.m32);
+            mat.m02 = (lhs.m00 * rhs.m03) + (lhs.m01 * rhs.m13) + (lhs.m02 * rhs.m23) + (lhs.m03 * rhs.m33);
+
+            mat.m10 = (lhs.m10 * rhs.m00) + (lhs.m11 * rhs.m10) + (lhs.m12 * rhs.m20) + (lhs.m13 * rhs.m30);
+            mat.m11 = (lhs.m10 * rhs.m01) + (lhs.m11 * rhs.m11) + (lhs.m12 * rhs.m21) + (lhs.m13 * rhs.m31);
+            mat.m12 = (lhs.m10 * rhs.m02) + (lhs.m11 * rhs.m12) + (lhs.m12 * rhs.m22) + (lhs.m13 * rhs.m32);
+            mat.m13 = (lhs.m10 * rhs.m03) + (lhs.m11 * rhs.m13) + (lhs.m12 * rhs.m23) + (lhs.m13 * rhs.m33);
+
+            mat.m20 = (lhs.m20 * rhs.m00) + (lhs.m21 * rhs.m10) + (lhs.m22 * rhs.m20) + (lhs.m23 * rhs.m30);
+            mat.m21 = (lhs.m20 * rhs.m01) + (lhs.m21 * rhs.m11) + (lhs.m22 * rhs.m21) + (lhs.m23 * rhs.m31);
+            mat.m22 = (lhs.m20 * rhs.m02) + (lhs.m21 * rhs.m12) + (lhs.m22 * rhs.m22) + (lhs.m23 * rhs.m32);
+            mat.m23 = (lhs.m20 * rhs.m03) + (lhs.m21 * rhs.m13) + (lhs.m22 * rhs.m23) + (lhs.m23 * rhs.m33);
+
+            mat.m30 = (lhs.m30 * rhs.m00) + (lhs.m31 * lhs.m10) + (lhs.m32 * rhs.m20) + (lhs.m33 * rhs.m30);
+            mat.m31 = (lhs.m30 * rhs.m01) + (lhs.m31 * lhs.m11) + (lhs.m32 * rhs.m21) + (lhs.m33 * rhs.m31);
+            mat.m32 = (lhs.m30 * rhs.m02) + (lhs.m31 * lhs.m12) + (lhs.m32 * rhs.m22) + (lhs.m33 * rhs.m32);
+            mat.m33 = (lhs.m30 * rhs.m03) + (lhs.m31 * lhs.m13) + (lhs.m32 * rhs.m23) + (lhs.m33 * rhs.m33);
+
+            return mat;
+        }
+
+        public static bool operator ==(Matrix4x4 lhs, Matrix4x4 rhs)
+        {
+            return (lhs.m00 == rhs.m00 && lhs.m01 == rhs.m01 && lhs.m02 == rhs.m02 && lhs.m03 == rhs.m03
+                && lhs.m10 == rhs.m10 && lhs.m11 == rhs.m11 && lhs.m12 == rhs.m12 && lhs.m13 == rhs.m13
+                && lhs.m20 == rhs.m20 && lhs.m21 == rhs.m21 && lhs.m22 == rhs.m22 && lhs.m23 == rhs.m23
+                && lhs.m30 == rhs.m30 && lhs.m31 == rhs.m31 && lhs.m32 == rhs.m32 && lhs.m33 == rhs.m33);
+        }
+        public static bool operator !=(Matrix4x4 lhs, Matrix4x4 rhs)
+        {
+            return (lhs.m00 != rhs.m00 || lhs.m01 != rhs.m01 || lhs.m02 != rhs.m02 || lhs.m03 != rhs.m03
+                && lhs.m10 != rhs.m10 || lhs.m11 != rhs.m11 || lhs.m12 != rhs.m12 || lhs.m13 != rhs.m13
+                && lhs.m20 != rhs.m20 || lhs.m21 != rhs.m21 || lhs.m22 != rhs.m22 || lhs.m23 != rhs.m23
+                && lhs.m30 != rhs.m30 || lhs.m31 != rhs.m31 || lhs.m32 != rhs.m32 || lhs.m33 != rhs.m33);
+        }
+
     }
 }
 
