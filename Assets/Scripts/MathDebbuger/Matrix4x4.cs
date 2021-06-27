@@ -76,12 +76,22 @@ namespace CustomMath
             return mat;
         }
 
-        public static Matrix4x4 Scale(Vector3 vector)
+        public static Matrix4x4 Scale(Vec3 vector)
         {
             Matrix4x4 mat = Matrix4x4.identity;
             mat.m00 = vector.x;
             mat.m11 = vector.y;
             mat.m22 = vector.z;
+            mat.m33 = 1;
+            return mat;
+        }
+
+        public static Matrix4x4 Translate(Vec3 vector)
+        {
+            Matrix4x4 mat = Matrix4x4.identity;
+            mat.m03 = vector.x;
+            mat.m12 = vector.y;
+            mat.m23 = vector.z;
             mat.m33 = 1;
             return mat;
         }
