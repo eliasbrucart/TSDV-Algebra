@@ -75,6 +75,16 @@ namespace CustomMath
             mat.m21 = 2.0f * (q.y * q.z) + 2.0f * (q.z * q.w);
             return mat;
         }
+
+        public static Matrix4x4 Scale(Vector3 vector)
+        {
+            Matrix4x4 mat = Matrix4x4.identity;
+            mat.m00 = vector.x;
+            mat.m11 = vector.y;
+            mat.m22 = vector.z;
+            mat.m33 = 1;
+            return mat;
+        }
     }
 }
 
