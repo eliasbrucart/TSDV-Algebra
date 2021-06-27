@@ -43,6 +43,38 @@ namespace CustomMath
             m33 = column3.w;
         }
 
+        public static Matrix4x4 zero
+        {
+            get
+            {
+                return new Matrix4x4(new Vector4(0,0,0,0), new Vector4(0,0,0,0), new Vector4(0,0,0,0), new Vector4(0,0,0,0));
+            }
+        }
+
+        public static  Matrix4x4 identity
+        {
+            get
+            {
+                return new Matrix4x4(new Vector4(1,0,0,0), new Vector4(0,1,0,0), new Vector4(0,0,1,0), new Vector4(0,0,0,1));
+            }
+        }
+
+        public static Matrix4x4 Rotate(MyQuaternion q)
+        {
+            Matrix4x4 mat = Matrix4x4.identity;
+            mat.m02 = 2.0f * (q.x * q.z) + 2.0f * (q.y * q.w);
+            mat.m12 = 2.0f * (q.y * q.z) - 2.0f * (q.x * q.w);
+            mat.m22 = 1 - 2.0f * (q.x * q.x) - 2.0f * (q.y * q.y);
+
+            mat.m00 = 1 - 2.0f * (q.y * q.y) - 2.0f * (q.z * q.z);
+            mat.m10 = 2.0f * (q.x * q.y) + 2.0f * (q.z * q.w);
+            mat.m20 = 2.0f * (q.x * q.z) - 2.0f * (q.y * q.w);
+
+            mat.m01 = 2.0f * (q.x * q.y) - 2.0f * (q.z * q.w);
+            mat.m11 = 1 - 2.0f * (q.x * q.x) - 2.0f * (q.z * q.z);
+            mat.m21 = 2.0f * (q.y * q.z) + 2.0f * (q.z * q.w);
+            return mat;
+        }
     }
 }
 
