@@ -171,6 +171,30 @@ namespace CustomMath
             return mat;
         }
 
+        public void Transpose()
+        {
+            m10 = m01;
+            m01 = m10;
+            m20 = m02;
+            m02 = m20;
+            m21 = m12;
+            m12 = m21;
+            m30 = m03;
+            m03 = m30;
+            m31 = m13;
+            m13 = m31;
+            m32 = m23;
+            m23 = m32;
+
+            /* 
+              matriz original =            Matriz transpuesta =               
+                m00, m01, m02, m03          m00, m10, m20, m30
+                m10, m11, m12, m13          m01, m11, m21, m31
+                m20, m21, m22, m23          m02, m12, m22, m32
+                m30, m31, m32, m33          m03, m13, m23, m33             
+           */
+        }
+
 
     }
 }
