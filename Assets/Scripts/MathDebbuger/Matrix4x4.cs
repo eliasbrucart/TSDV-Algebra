@@ -255,6 +255,50 @@ namespace CustomMath
 
         }
 
+        public Vector3 lossyScale()
+        {
+            Vector3 lossy = Vector3.zero;
+            lossy.x = m00;
+            lossy.y = m11;
+            lossy.z = m22;
+            return lossy;
+        }
+
+        public void SetRow(Vector4 Row, float RowPos)
+        {
+            switch (RowPos)
+            {
+                case 0:
+                    m00 = Row.x;
+                    m01 = Row.y;
+                    m02 = Row.z;
+                    m03 = Row.w;
+                    break;
+                case 1:
+                    m10 = Row.x;
+                    m11 = Row.y;
+                    m12 = Row.z;
+                    m13 = Row.w;
+                    break;
+                case 2:
+                    m20 = Row.x;
+                    m21 = Row.y;
+                    m22 = Row.z;
+                    m23 = Row.w;
+                    break;
+                case 3:
+                    m30 = Row.x;
+                    m31 = Row.y;
+                    m32 = Row.z;
+                    m33 = Row.w;
+                    break;
+                default:
+
+                    break;
+            }
+
+        }
+
     }
 }
 
