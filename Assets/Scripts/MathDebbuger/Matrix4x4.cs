@@ -152,6 +152,26 @@ namespace CustomMath
                 && lhs.m30 != rhs.m30 || lhs.m31 != rhs.m31 || lhs.m32 != rhs.m32 || lhs.m33 != rhs.m33);
         }
 
+        public static Matrix4x4 Transpose(Matrix4x4 original)
+        {
+            Matrix4x4 mat = original;
+            mat.m10 = original.m01;
+            mat.m01 = original.m10;
+            mat.m20 = original.m02;
+            mat.m02 = original.m20;
+            mat.m21 = original.m12;
+            mat.m12 = original.m21;
+            mat.m30 = original.m03;
+            mat.m03 = original.m30;
+            mat.m31 = original.m13;
+            mat.m13 = original.m31;
+            mat.m32 = original.m23;
+            mat.m23 = original.m32;
+
+            return mat;
+        }
+
+
     }
 }
 
