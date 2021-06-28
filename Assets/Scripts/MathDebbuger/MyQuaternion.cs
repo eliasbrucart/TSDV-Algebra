@@ -248,7 +248,7 @@ namespace CustomMath
 
         public static MyQuaternion SlerpUnclamped(MyQuaternion a, MyQuaternion b, float t)
         {
-            QuaternionCustom q = QuaternionCustom.identity;
+            MyQuaternion q = MyQuaternion.identity;
             a.Normalize();
             b.Normalize();
             float dot = Quaternion.Dot(a, b);
@@ -260,7 +260,7 @@ namespace CustomMath
 
             float sin0 = Mathf.Cos(angleT) - dot * sinT / sinT_0;
             float sin1 = sinT / sinT_0;
-            QuaternionCustom res = QuaternionCustom.identity;
+            MyQuaternion res = MyQuaternion.identity;
             res.x = (a.x * sin0) + (b.x * sin1);
             res.y = (a.y * sin0) + (b.y * sin1);
             res.z = (a.z * sin0) + (b.z * sin1);
