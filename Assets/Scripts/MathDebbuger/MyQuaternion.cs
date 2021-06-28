@@ -214,7 +214,36 @@ namespace CustomMath
 
         public static MyQuaternion Slerp(MyQuaternion a, MyQuaternion b, float t)
         {
-            throw new NotImplementedException();
+            MyQuaternion q = MyQuaternion.identity;
+            a.Normalize();
+            b.Normalize();
+            float dot = Quaternion.Dot(a, b);
+            if (dot < 0)
+            {
+                a = MyQuaternion.Inverse(a);
+                dot = -dot;
+            }
+            float max = 0.9995f;
+            if (dot > max)
+            {
+                MyQuaternion result = MyQuaternion.Lerp(a, b, t);
+                result.Normalize();
+                return result;
+            }
+            // si esta dentro del rango (0 a 1 0 0.99995)
+            float angleT_0 = Mathf.Acos(dot);
+            float angleT = angleT_0 * t;
+            float sinT = Mathf.Sin(angleT);
+            float sinT_0 = Mathf.Sin(angleT_0);
+
+            float sin0 = Mathf.Cos(angleT) - dot * sinT / sinT_0;
+            float sin1 = sinT / sinT_0;
+            MyQuaternion res = MyQuaternion.identity;
+            res.x = (a.x * sin0) + (b.x * sin1);
+            res.y = (a.y * sin0) + (b.y * sin1);
+            res.z = (a.z * sin0) + (b.z * sin1);
+            res.w = (a.w * sin0) + (b.w * sin1);
+            return res;
         }
 
         public static MyQuaternion SlerpUnclamped(MyQuaternion a, MyQuaternion b, float t)
