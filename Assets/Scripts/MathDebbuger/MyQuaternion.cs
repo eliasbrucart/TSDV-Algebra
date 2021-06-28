@@ -248,7 +248,24 @@ namespace CustomMath
 
         public static MyQuaternion SlerpUnclamped(MyQuaternion a, MyQuaternion b, float t)
         {
-            throw new NotImplementedException();
+            QuaternionCustom q = QuaternionCustom.identity;
+            a.Normalize();
+            b.Normalize();
+            float dot = Quaternion.Dot(a, b);
+
+            float angleT_0 = Mathf.Acos(dot);
+            float angleT = angleT_0 * t;
+            float sinT = Mathf.Sin(angleT);
+            float sinT_0 = Mathf.Sin(angleT_0);
+
+            float sin0 = Mathf.Cos(angleT) - dot * sinT / sinT_0;
+            float sin1 = sinT / sinT_0;
+            QuaternionCustom res = QuaternionCustom.identity;
+            res.x = (a.x * sin0) + (b.x * sin1);
+            res.y = (a.y * sin0) + (b.y * sin1);
+            res.z = (a.z * sin0) + (b.z * sin1);
+            res.w = (a.w * sin0) + (b.w * sin1);
+            return res;
         }
 
         public static Vec3 ToEulersAngles(MyQuaternion rotation)
@@ -312,7 +329,12 @@ namespace CustomMath
 
         public void SetLookRotation(Vec3 view, Vec3 up)
         {
-            throw new NotImplementedException();
+            MyQuaternion q = MyQuaternion.identity;
+            q = LookRotation(view, up);
+            x = q.x;
+            y = q.y;
+            z = q.z;
+            w = q.w;
         }
 
         public void SetLookRotation(Vec3 view)
@@ -347,7 +369,7 @@ namespace CustomMath
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return "(" + x.ToString() + ", " + y.ToString() + ", " + z.ToString() + ", " + w.ToString() + ")";
         }
 
         #endregion
