@@ -220,6 +220,41 @@ namespace CustomMath
             return RowToReturn;
         }
 
+        public void SetColumn(Vector4 Column, float ColumnPos)
+        {
+            switch (ColumnPos)
+            {
+                case 0:
+                    m00 = Column.x;
+                    m10 = Column.y;
+                    m20 = Column.z;
+                    m30 = Column.w;
+                    break;
+                case 1:
+                    m01 = Column.x;
+                    m11 = Column.y;
+                    m21 = Column.z;
+                    m31 = Column.w;
+                    break;
+                case 2:
+                    m02 = Column.x;
+                    m12 = Column.y;
+                    m22 = Column.z;
+                    m32 = Column.w;
+                    break;
+                case 3:
+                    m03 = Column.x;
+                    m13 = Column.y;
+                    m23 = Column.z;
+                    m33 = Column.w;
+                    break;
+                default:
+
+                    break;
+            }
+
+        }
+
     }
 }
 
