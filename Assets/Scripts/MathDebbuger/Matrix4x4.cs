@@ -195,6 +195,30 @@ namespace CustomMath
            */
         }
 
+        public Vector4 GetRow(int RowPos)
+        {
+            Vector4 RowToReturn = Vector4.zero;
+            switch (RowPos)
+            {
+                case 0:
+                    RowToReturn = new Vector4(m00, m01, m02, m03);
+                    break;
+                case 1:
+                    RowToReturn = new Vector4(m10, m11, m12, m13);
+                    break;
+                case 2:
+                    RowToReturn = new Vector4(m20, m21, m22, m23);
+                    break;
+                case 3:
+                    RowToReturn = new Vector4(m30, m31, m32, m33);
+                    break;
+                default:
+
+                    break;
+            }
+
+            return RowToReturn;
+        }
 
     }
 }
