@@ -91,7 +91,17 @@ namespace CustomMath
 
         public static MyQuaternion Euler(float x, float y, float z)
         {
-            throw new NotImplementedException();
+            float rad = Mathf.Deg2Rad;
+            x *= rad;
+            y *= rad;
+            z *= rad;
+            MyQuaternion q = new MyQuaternion();
+            q.x = Mathf.Sin(x * 0.5f);
+            q.y = Mathf.Sin(y * 0.5f);
+            q.z = Mathf.Sin(z * 0.5f);
+            q.w = Mathf.Cos(x * 0.5f) * Mathf.Cos(y * 0.5f) * Mathf.Cos(z * 0.5f) - Mathf.Sin(x * 0.5f) * Mathf.Sin(y * 0.5f) * Mathf.Sin(z * 0.5f);
+            q.Normalize();
+            return q;
         }
 
         public static MyQuaternion EulerAngles(float x, float y, float z)
@@ -114,9 +124,16 @@ namespace CustomMath
             throw new NotImplementedException();
         }
 
-        public static MyQuaternion FromToRotation(Vec3 from)
+        public static MyQuaternion FromToRotation(Vec3 from, Vec3 to)
         {
-            throw new NotImplementedException();
+            Vec3 cross = Vec3.Cross(from, to);
+            MyQuaternion result = MyQuaternion.identity;
+            result.x = cross.x;
+            result.y = cross.y;
+            result.z = cross.z;
+            result.w = Mathf.Sqrt(from.magnitude * to.magnitude) * Mathf.Sqrt(from.magnitude * to.magnitude) + Vec3.Dot(from, to);
+            result.Normalize();
+            return result;
         }
 
         public static MyQuaternion Inverse(MyQuaternion rotation)
@@ -145,7 +162,13 @@ namespace CustomMath
 
         public static MyQuaternion LerpUnclamped(MyQuaternion a, MyQuaternion b, float t)
         {
-            throw new NotImplementedException();
+            MyQuaternion q = new MyQuaternion();
+            q.x = ((b.x - a.x) * t + a.x);
+            q.y = ((b.y - a.y) * t + a.y);
+            q.z = ((b.z - a.z) * t + a.z);
+            q.w = ((b.w - a.w) * t + a.w);
+            q.Normalize();
+            return q;
         }
 
         public static MyQuaternion LookRotation(Vec3 forward)
