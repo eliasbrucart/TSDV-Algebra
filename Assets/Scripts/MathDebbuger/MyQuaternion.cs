@@ -178,7 +178,23 @@ namespace CustomMath
 
         public static MyQuaternion LookRotation(Vec3 forward, Vec3 upwards)
         {
-            throw new NotImplementedException();
+            MyQuaternion result;
+            if (forward == Vec3.Zero)
+            {
+                result = MyQuaternion.identity;
+                return result;
+            }
+            if (upwards != forward)
+            {
+                upwards.Normalize();
+                Vec3 a = forward + upwards * -Vec3.Dot(forward, upwards);
+                MyQuaternion q = MyQuaternion.FromToRotation(Vec3.Forward, a);
+                return MyQuaternion.FromToRotation(a, forward) * q;
+            }
+            else
+            {
+                return MyQuaternion.FromToRotation(Vec3.Forward, forward);
+            }
         }
 
         public static MyQuaternion Normalize(MyQuaternion q)
