@@ -32,6 +32,28 @@ namespace CustomMath
             normal = Vec3.Cross(sideA, sideB).normalized;
             distance = -Vec3.Dot(normal, a);
         }
+        
+        //Convierto los Vector3 a vec3, asi luego seteo la normal y el distance del plano
+        public PlaneA(Vector3 a, Vector3 b, Vector3 c)
+        {
+            Vec3 myVec3a;
+            Vec3 myVec3b;
+            Vec3 myVec3c;
+            myVec3a.x = a.x;
+            myVec3a.y = a.y;
+            myVec3a.z = a.z;
+            myVec3b.x = b.x;
+            myVec3b.y = b.y;
+            myVec3b.z = b.z;
+            myVec3c.x = c.x;
+            myVec3c.y = c.y;
+            myVec3c.z = c.z;
+            Vec3 sideA = myVec3b - myVec3a;
+            Vec3 sideB = myVec3c - myVec3a;
+
+            normal = Vec3.Cross(sideA, sideB).normalized;
+            distance = -Vec3.Dot(normal, myVec3a);
+        }
 
         public static PlaneA Translate(PlaneA planea, Vec3 translation)
         {
@@ -63,6 +85,18 @@ namespace CustomMath
                 return false;
         }
 
+        public bool GetSide(Vector3 point)
+        {
+            Vec3 pointA;
+            pointA.x = point.x;
+            pointA.y = point.y;
+            pointA.z = point.z;
+            if ((Vec3.Dot(normal, pointA) + distance) > 0)
+                return true;
+            else
+                return false;
+        }
+
         public bool SameSide(Vec3 in0, Vec3 in1)
         {
             if (GetSide(in0) == GetSide(in1))
@@ -78,6 +112,27 @@ namespace CustomMath
 
             normal = Vec3.Cross(side1, side2).normalized;
             distance = -Vec3.Dot(normal, a);
+        }
+
+        public void Set3Points(Vector3 a, Vector3 b, Vector3 c)
+        {
+            Vec3 myVec3a;
+            Vec3 myVec3b;
+            Vec3 myVec3c;
+            myVec3a.x = a.x;
+            myVec3a.y = a.y;
+            myVec3a.z = a.z;
+            myVec3b.x = b.x;
+            myVec3b.y = b.y;
+            myVec3b.z = b.z;
+            myVec3c.x = c.x;
+            myVec3c.y = c.y;
+            myVec3c.z = c.z;
+            Vec3 side1 = myVec3b - myVec3a;
+            Vec3 side2 = myVec3c - myVec3a;
+
+            normal = Vec3.Cross(side1, side2).normalized;
+            distance = -Vec3.Dot(normal, myVec3a);
         }
 
         public void SetNormalAndPosition(Vec3 inNormal, Vec3 inPoint)
