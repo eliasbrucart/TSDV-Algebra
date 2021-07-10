@@ -130,6 +130,7 @@ namespace CustomMath
             return angle;
         }
 
+        //devuelve un quaternion que rota en determinado eje con un angulo que le pasemos
         public static MyQuaternion AngleAxis(float angle, Vec3 axis)
         {
             angle *= Mathf.Deg2Rad;
@@ -144,11 +145,6 @@ namespace CustomMath
             result.Normalize();
 
             return result;
-        }
-
-        public static MyQuaternion AxisAngle(Vec3 axis, float angle)
-        {
-            throw new NotImplementedException();
         }
 
         public static float Dot(MyQuaternion a, MyQuaternion b)
@@ -196,16 +192,6 @@ namespace CustomMath
         public static MyQuaternion EulerAngles(Vec3 euler)
         {
             return Euler(euler.x, euler.y, euler.z);
-        }
-
-        public static MyQuaternion EulerRotation(float x, float y, float z)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static MyQuaternion EulerRotation(Vec3 euler)
-        {
-            throw new NotImplementedException();
         }
 
         public static MyQuaternion FromToRotation(Vec3 from, Vec3 to)
@@ -353,19 +339,9 @@ namespace CustomMath
             return res;
         }
 
-        public static Vec3 ToEulersAngles(MyQuaternion rotation)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Equals(MyQuaternion other)
         {
             return x == other.x && y == other.y && z == other.z && w == other.w;
-        }
-
-        public override bool Equals(object other)
-        {
-            throw new NotImplementedException();
         }
 
         public override int GetHashCode()
@@ -384,27 +360,10 @@ namespace CustomMath
 
         public void Set(float newX, float newY, float newZ, float newW)
         {
-            throw new NotImplementedException();
-        }
-
-        public void SetAxisAngles(Vec3 axis, float angle)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetEulerAngles(float x, float y, float z)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetEulerRotation(float x, float y, float z)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetEulerRotation(Vec3 euler)
-        {
-            throw new NotImplementedException();
+            x = newX;
+            y = newY;
+            z = newZ;
+            w = newW;
         }
 
         public void SetFromToRotation(Vec3 fromDirection, Vec3 toDirection)
@@ -428,30 +387,14 @@ namespace CustomMath
 
         public void SetLookRotation(Vec3 view)
         {
-            throw new NotImplementedException();
+            MyQuaternion quat = LookRotation(view);
+            x = quat.x;
+            y = quat.y;
+            z = quat.z;
+            w = quat.w;
         }
 
         public void ToAngleAxis(out float angle, out Vec3 axis)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ToAngleAxis(out Vec3 axis, out float angle)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Vec3 ToEuler()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Vec3 ToEulerAngles()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ToString(string format)
         {
             throw new NotImplementedException();
         }
@@ -467,7 +410,9 @@ namespace CustomMath
 
         public static Vec3 operator *(MyQuaternion rotation, Vec3 point)
         {
-            throw new NotImplementedException();
+            MyQuaternion quatPoint = Euler(point);
+            quatPoint *= rotation;
+            return quatPoint.eulerAngles;
         }
 
         public static MyQuaternion operator *(MyQuaternion lhs, MyQuaternion rhs)
