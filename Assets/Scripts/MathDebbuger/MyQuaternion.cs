@@ -12,7 +12,27 @@ namespace CustomMath
         public float w;
 
         public static MyQuaternion identity { get { return new MyQuaternion(0, 0, 0, 1); } }
-        //public Vec3 eulerAngles { get; set; }
+        //Retorna los valores en x, y & z en los que un objeto esta rotado en el mundo
+        //Setea los valores de x, y & z en los que queremos rotar un objeto, para esto usamos nuestro metodo Euler y asi rotar correctamente
+        public Vec3 eulerAngles 
+        {
+            get
+            {
+                Vec3 a = Vec3.Zero;
+                a.y = Mathf.Atan2((2 * y * w) - (2 * x * z), 1 - (2 * (y * y)) - 2 * (z * z)) * Mathf.Rad2Deg;
+                a.z = Mathf.Asin(2 * x * y + 2 * z * w) * Mathf.Rad2Deg;
+                a.x = Mathf.Atan2(2 * x * w - 2 * y * z, 1 - 2 * (x * x) - 2 * (z * z)) * Mathf.Rad2Deg;
+                return a;
+            }
+            set
+            {
+                MyQuaternion quat = MyQuaternion.Euler(value);
+                x = quat.x;
+                y = quat.y;
+                z = quat.z;
+                w = quat.w;
+            }
+        }
         //public MyQuaternion normalized { get; }
 
         //constructors
@@ -87,6 +107,23 @@ namespace CustomMath
         public static float Dot(MyQuaternion a, MyQuaternion b)
         {
             return (a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w);
+        }
+        //Retorna un quaternion que gira n grados al rededor de cada uno de los ejes
+        //Calculamos el seno del angulo en cada una de las componentes
+        //El valor de W sera el resultado de la multiplicacion de los cosenos de cada componenete restando
+        //el valor de la multiplicacion de los senos de cada componenete
+        //Esto se hace por que debemos pasar de Euler a Quaternion, no podemos rotar en Euler.
+        public static MyQuaternion Euler(Vec3 euler)
+        {
+            float rad = Mathf.Deg2Rad;
+            euler *= rad;
+            MyQuaternion q = new MyQuaternion();
+            q.x = Mathf.Sin(euler.x * 0.5f);
+            q.y = Mathf.Sin(euler.y * 0.5f);
+            q.z = Mathf.Sin(euler.z * 0.5f);
+            q.w = Mathf.Cos(euler.x * 0.5f) * Mathf.Cos(euler.y * 0.5f) * Mathf.Cos(euler.z * 0.5f) - Mathf.Sin(euler.x * 0.5f) * Mathf.Sin(euler.y * 0.5f) * Mathf.Sin(euler.z * 0.5f);
+            q.Normalize();
+            return q;
         }
 
         public static MyQuaternion Euler(float x, float y, float z)
