@@ -67,7 +67,47 @@ namespace CustomMath
             this.w = quat.w;
         }
 
-        public float this[int index] { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
+        //retorna el valor de cada componente
+        //setea el valor de cada componente
+        public float this[int index] 
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0:
+                        return x;
+                    case 1:
+                        return y;
+                    case 2:
+                        return z;
+                    case 3:
+                        return w;
+                    default:
+                        throw new IndexOutOfRangeException("Fuera de rango! 0 -> 3");
+                }
+            } 
+            set 
+            {
+                switch (index)
+                {
+                    case 0:
+                        x = value;
+                        break;
+                    case 1:
+                        y = value;
+                        break;
+                    case 2:
+                        z = value;
+                        break;
+                    case 3:
+                        w = value;
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException("Fuera de rango! 0 -> 3");
+                }
+            } 
+        }
 
         //operators
         public static implicit operator Quaternion(MyQuaternion q)
