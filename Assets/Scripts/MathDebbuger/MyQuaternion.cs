@@ -409,7 +409,11 @@ namespace CustomMath
 
         public void SetFromToRotation(Vec3 fromDirection, Vec3 toDirection)
         {
-            throw new NotImplementedException();
+            MyQuaternion q = FromToRotation(fromDirection, toDirection);
+            x = q.x;
+            y = q.y;
+            z = q.z;
+            w = q.w;
         }
 
         public void SetLookRotation(Vec3 view, Vec3 up)
