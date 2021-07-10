@@ -33,7 +33,14 @@ namespace CustomMath
                 w = quat.w;
             }
         }
-        //public MyQuaternion normalized { get; }
+        //normalizamos el quaternion con la misma orientacion, pero ahora su magnitud pasa a ser 1
+        public MyQuaternion normalized
+        {
+            get
+            {
+                return Normalize(this);
+            }
+        }
 
         //constructors
         public MyQuaternion(float x, float y, float z, float w)
