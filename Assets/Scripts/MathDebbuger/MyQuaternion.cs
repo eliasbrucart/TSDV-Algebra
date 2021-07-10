@@ -150,12 +150,12 @@ namespace CustomMath
 
         public static MyQuaternion EulerAngles(float x, float y, float z)
         {
-            throw new NotImplementedException();
+            return Euler(new Vec3(x, y, z));
         }
 
         public static MyQuaternion EulerAngles(Vec3 euler)
         {
-            throw new NotImplementedException();
+            return Euler(euler.x, euler.y, euler.z);
         }
 
         public static MyQuaternion EulerRotation(float x, float y, float z)
@@ -217,9 +217,10 @@ namespace CustomMath
 
         public static MyQuaternion LookRotation(Vec3 forward)
         {
-            throw new NotImplementedException();
+            return LookRotation(forward, Vec3.Up);
         }
 
+        //crea una rotacion que orienta a un objeto que el forward de este mirando con la misma direccion que el forward de su objetivo
         public static MyQuaternion LookRotation(Vec3 forward, Vec3 upwards)
         {
             MyQuaternion result;
