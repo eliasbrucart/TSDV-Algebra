@@ -144,6 +144,12 @@ namespace CustomMath
         {
             return "X = " + x.ToString() + "   Y = " + y.ToString() + "   Z = " + z.ToString();
         }
+        //retorna un angulo entre dos vectores
+        //primero sacamos el dot entre los dos vectores que estamos evaluando
+        //multiplicamos la magnitud de ambos
+        //calculamos el arco coseno para luego saber de cuanto es el angulo
+        //este arc coseno se calcula entre la division de lo que nos dio el producto punto y la multiplicacion de las magnitudes de ambos vectores
+        //por ultimo pasamos el resultado del coseno a grados
         public static float Angle(Vec3 from, Vec3 to)
         {
             float dot = Dot(from, to);
@@ -151,6 +157,9 @@ namespace CustomMath
             float resultCosine = Mathf.Acos(dot / magnitude);
             return resultCosine  / Mathf.Rad2Deg;
         }
+        //retorna un vector con una magnitud maxima
+        //si la magnitud del vector es mayor al valor que le pasemos, retornamos el vector con esa maxima longitud
+        //si es menor, simplemente retornamos el vector que tendra una magnitud original
         public static Vec3 ClampMagnitude(Vec3 vector, float maxLength)
         {
             if (Magnitude(vector) > maxLength)
@@ -158,14 +167,20 @@ namespace CustomMath
             else
                 return vector;
         }
+        //este metodo retorna la maginitud del vector
+        //el valor se obtiene del calculo de la raiz cuadrada de la suma de cada una de sus componentes elevadas al cuadrado
         public static float Magnitude(Vec3 vector)
         {
             return Mathf.Sqrt(Mathf.Pow(vector.x, 2) + Mathf.Pow(vector.y, 2) + Mathf.Pow(vector.z, 2));
         }
+        //retorna un vector resultado del producto cruz entre dos vectores que le pasemos al metodo
+        //obtenemos el vector a partir de la resta entre el resultado de la multiplicacion de dos componenetes de ambos vectores
         public static Vec3 Cross(Vec3 a, Vec3 b)
         {
             return new Vec3(((a.y * b.z) - (a.z * b.y)), ((a.z * b.x) - (a.x * b.z)), ((a.x * b.y) - (a.y * b.x)));
         }
+        //este metodo retorna la distancia que hay entre un vector y otro
+        //para calcular la distancia tenemos que calcular la raiz cuadrada de la resta de cada una de sus componenetes y eso elevarlo al cuadrado
         public static float Distance(Vec3 a, Vec3 b)
         {
             return Mathf.Sqrt(Mathf.Pow(b.x - a.x, 2) + Mathf.Pow(b.y - a.y, 2) + Mathf.Pow(b.z - a.z, 2));
@@ -184,6 +199,8 @@ namespace CustomMath
         {
             return new Vec3(a + (b - a) * t);
         }
+        //retorna el vector mas grande comparando dos vectores
+        //comparamos las componenetes de cada vector y se las asiganmos al nuevo vector
         public static Vec3 Max(Vec3 a, Vec3 b)
         {
             float newX = a.x;
@@ -197,6 +214,8 @@ namespace CustomMath
                 newZ = b.z;
             return new Vec3(newX,newY,newZ);
         }
+        //retorna el vector mas chico comparando dos vectores
+        //comparamos las componenetes de cada vector y se las asiganmos al nuevo vector
         public static Vec3 Min(Vec3 a, Vec3 b)
         {
             float newX = a.x;
@@ -210,14 +229,23 @@ namespace CustomMath
                 newZ = b.z;
             return new Vec3(newX,newY,newZ);
         }
+        //devuelve el resultado de la raiz cuadrada de la magnitud del vector
         public static float SqrMagnitude(Vec3 vector)
         {
             return Mathf.Sqrt(Magnitude(vector));
         }
+        //retorna un vector que es la proyeccion de Vec3 vector
+        //esta proyeccion se da en onNormal lo que tiene que tener el mismo sentido, el vector proyectado tiene la misma longitud que el vector original
+        //para obtener esta refleccion debemos calcular el producto punto entre el vector y la normal dividiendo el resultado de la magnitud
+        //de la normal elevado al cuadrado y a eso lo multiplicamos por la misma normal
         public static Vec3 Project(Vec3 vector, Vec3 onNormal) 
         {
             return (Dot(vector, onNormal) / Mathf.Pow(Magnitude(onNormal), 2) * onNormal);
         }
+        //Retorna un vector reflejado del vector inDirection
+        //este vector se obtiene primero normalizando la normal
+        //luego calculamos el producto punto entre el vector original (inDirection) y la normal
+        //a este resultado lo multiplicamos por la normal ya normalizada y nos da la reflexion del vector
         public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal) 
         {
             inNormal.Normalize();
@@ -229,10 +257,13 @@ namespace CustomMath
             y = newY;
             z = newZ;
         }
+        //multiplicamos las componentes del vector por las componentes del vector escala
+        //con esto podremos escalar nuestro vector a partir de otro
         public void Scale(Vec3 scale)
         {
             Set(x*scale.x, y*scale.y, z*scale.z);
         }
+        //A partir de dos vectores, retornamos uno escalado
         public static Vec3 Scale(Vec3 a, Vec3 b)
         {
             return new Vec3(a.x * b.x, a.y * b.y, a.z * b.z);
