@@ -67,7 +67,9 @@ namespace CustomMath
             Vec3 aux = - (planea.normal * planea.distance + translation);
             return new PlaneA(planea.normal, aux);
         }
-
+        //Retorna el punto mas cercano que se encuentra en el plano con respecto a otro punto
+        //para esto restamos el vector point con la normal y luego multiplicamos el valor de la resta con
+        //lo que nos devuelva la distancia al punto.
         public Vec3 ClosetsPointOnPlane(Vec3 point)
         {
             return (point - normal * GetDistanceToPoint(point));
@@ -95,6 +97,7 @@ namespace CustomMath
                 return false;
         }
         //retorna verdadero si el punto que le pasamos esta del lado positivo del plano
+        //GetSide verifica el lado positivo por la normal, hacia a donde apunte la normal, ese es el lado positivo.
         public bool GetSide(Vector3 point)
         {
             Vec3 pointA;

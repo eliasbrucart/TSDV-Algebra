@@ -87,6 +87,10 @@ namespace CustomMath
         #endregion
 
         #region Operators
+        //compara un vector con otro, primero sacamos la diferencia entre las componente de ambos vecotres y los almacenamos en floats
+        //calculamos la magnitud elevando al cuadrado los resultados de la diferencia de cada una de las componentes y sumando los resultados de los cuadrados
+        //por ultimo retornamos el valor de la magnitud si es mas chica que la constante epsilon al cuadrado
+        //episilon es un numero muy chico, se usa esta constante para optimizar el proceso del calculo.
         public static bool operator ==(Vec3 left, Vec3 right)
         {
             float diff_x = left.x - right.x;
@@ -189,6 +193,8 @@ namespace CustomMath
         {
             return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
         }
+        //Interpolacion lineal entre dos vectores, si el valor de t es 1, entoces la interpolacion ira al punto b, si esto no es asi
+        //la interpolacion ira hacia el punto a
         public static Vec3 Lerp(Vec3 a, Vec3 b, float t)
         {
             if(t >= 1)
