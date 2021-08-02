@@ -56,7 +56,8 @@ namespace CustomMath
                 return new Matrix4x4(new Vector4(1, 0, 0, 0), new Vector4(0, 1, 0, 0), new Vector4(0, 0, 1, 0), new Vector4(0, 0, 0, 1));
             }
         }
-
+        //Matriz de rotacion, dejamos en 1 el el eje en el cual vamos a rotar y 
+        //luego debemos hacer el calculo para obtener los angulos en los demas ejes
         public static Matrix4x4 Rotate(MyQuaternion q)
         {
             Matrix4x4 mat = Matrix4x4.identity;
@@ -73,7 +74,9 @@ namespace CustomMath
             mat.m21 = 2.0f * (q.y * q.z) + 2.0f * (q.z * q.w);
             return mat;
         }
-
+        //retorna la matriz de escala, los valores que se modificaran en scale seran "en cruz"
+        //el primer valor de la cruz sera la escala en x, el segundo en Y y por ultimo en z
+        //el ultimo valor es la w, esta siempre sera 1
         public static Matrix4x4 Scale(Vec3 vector)
         {
             Matrix4x4 mat = Matrix4x4.identity;
@@ -83,7 +86,9 @@ namespace CustomMath
             mat.m33 = 1;
             return mat;
         }
-
+        //retorna la matriz de traslacion, esta representa a la posicion
+        //la traslacion se define como la ultima columna de la matriz, siendo el primer valor para x el segundo para Y
+        //y el ultimo para z, la componente w sera siempre 1.
         public static Matrix4x4 Translate(Vec3 vector)
         {
             Matrix4x4 mat = Matrix4x4.identity;
@@ -93,7 +98,9 @@ namespace CustomMath
             mat.m33 = 1;
             return mat;
         }
-
+        //retorna la matriz trs, esta es el resultado de la multiplicacion de las matrices de traslacion, 
+        //luego la de rotacion y por ultimo la matriz de escala
+        //se debe seguir el orden de la multiplicacion ya que la multiplicacion de matrices no es conmutativa
         public static Matrix4x4 TRS(Vec3 pos, MyQuaternion q, Vec3 scale)
         {
             Matrix4x4 trs = Matrix4x4.zero;
@@ -151,7 +158,7 @@ namespace CustomMath
                 && lhs.m20 != rhs.m20 || lhs.m21 != rhs.m21 || lhs.m22 != rhs.m22 || lhs.m23 != rhs.m23
                 && lhs.m30 != rhs.m30 || lhs.m31 != rhs.m31 || lhs.m32 != rhs.m32 || lhs.m33 != rhs.m33);
         }
-
+        //transpone la matriz que le pasemos, reordena la matriz cambiando las filas por columnas y columnas por filas
         public static Matrix4x4 Transpose(Matrix4x4 original)
         {
             Matrix4x4 mat = original;
@@ -170,7 +177,7 @@ namespace CustomMath
 
             return mat;
         }
-
+        //transpone la matriz, reordena la matriz cambiando las filas por columnas y las columnas por filas
         public void Transpose()
         {
             m10 = m01;
@@ -194,7 +201,7 @@ namespace CustomMath
                 m30, m31, m32, m33          m03, m13, m23, m33             
            */
         }
-
+        //retorna la fila que le indiquemos al metodo
         public Vector4 GetRow(int RowPos)
         {
             Vector4 RowToReturn = Vector4.zero;
@@ -219,7 +226,7 @@ namespace CustomMath
 
             return RowToReturn;
         }
-
+        //seteamos valores de un vector4 a las columnas de la matriz cuadrada
         public void SetColumn(Vector4 Column, float ColumnPos)
         {
             switch (ColumnPos)
@@ -254,7 +261,8 @@ namespace CustomMath
             }
 
         }
-
+        //devuelve la escala del objeto tanto en x, en y como en z
+        //m00, m11, m22 son los valores "en cruz" que usa la matriz de escala para saber cuan escalado esta el objeto
         public Vector3 lossyScale()
         {
             Vector3 lossy = Vector3.zero;
@@ -263,7 +271,8 @@ namespace CustomMath
             lossy.z = m22;
             return lossy;
         }
-
+        //setea los valores que le pasemos a las filas de la matriz
+        //debemos pasarle un vector4 ya que es una matriz cuadrada
         public void SetRow(Vector4 Row, float RowPos)
         {
             switch (RowPos)
